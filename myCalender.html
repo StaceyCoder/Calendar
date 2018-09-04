@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calender</title>
+  </head>
+  <body>
+    <div id="calender-container">
+      <div id="calender-header">
+        <span id="calenderMonthYear"></span>
+      </div>
+      <div id="calender-dates">
+
+      </div>
+
+    </div>
+
+
+    <script type="text/javascript">
+      window.onload = function () {
+        var d = new Date();
+        var month_name = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var month = d.getMonth(); // 0-11
+        var year = d.getFullYear(); //2018
+        var first_date = month_name[month] + " " + 3 + " " + year; // July 3, 2018
+        var tmp = new Date(first_date).toDateString(); //Tuesday July 3 2018 ...
+        var first_day = tmp.substring(0, 3); //Tuesday
+        var day_name = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        var day_no = day_name.indexOf(first_day); //3
+        var days = new Date(year, month+1, 0).getDate(); // Tuesday July 3 2018 ...
+        var calender = get_Calendar(day_no, days);
+        document.getElementById("calenderMonthYear").innerHTML = month_name[month]+" "+ year;
+        document.getElementById("calender-dates").appendChild(calender);
+      }
+
+      function get_Calendar(day_no, days){
+        var table = document.createElement('table');
+        var tr = document.createElement('tr');
+
+        // row for the day letters
+        for(var c = 0; c<=6; c++){
+          var td = document.createElement('td');
+          td.innerHTML = "SMTWTFS"[c];
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+
+        //create 2nd row
+        tr = document.createElement('tr');
+        var c;
+        for(c=0; c<=6; c++){
+          if (c == day_no){
+            break;
+          }
+          var td = document.createElement('td');
+          td.innerHTML = "";
+          tr.appendChild(td);
+        }
+        var count = 1;
+        for (; c<=6; c++){
+          var td = document.createElement('td');
+          td.innerHTML = count;
+          count++;
+          tr.appendChild(td);
+        }
+        table.appendChild(tr);
+
+        // rest of the date rows
+
+        for (var r= 3; r<=7; r++){
+          tr = document.createElement('tr');
+          for(var c=0; c<=6; c++){
+            if(count > days){
+              table.appendChild(tr);
+              return table;
+            }
+            var td = document.createElement('td');
+            td.innerHTML = count;
+            count++;
+            tr.appendChild(td);
+          }
+          table.appendChild(tr);
+        }
+        return table
+      }
+    </script>
+  </body>
+</html>
