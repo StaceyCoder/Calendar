@@ -22,12 +22,12 @@
         var month_name = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var month = d.getMonth(); // 0-11
         var year = d.getFullYear(); //2018
-        var first_date = month_name[month] + " " + 3 + " " + year; // July 3, 2018
-        var tmp = new Date(first_date).toDateString(); //Tuesday July 3 2018 ...
+        var first_date = month_name[month] + " " + 3 + " " + year; // September 3, 2018
+        var tmp = new Date(first_date).toDateString(); //Monday September 3 2018 ...
         var first_day = tmp.substring(0, 3); //Tuesday
         var day_name = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
         var day_no = day_name.indexOf(first_day); //3
-        var days = new Date(year, month+1, 0).getDate(); // Tuesday July 3 2018 ...
+        var days = new Date(year, month+1, 0).getDate(); // Monday September 3 2018 ...
         var calender = get_Calendar(day_no, days);
         document.getElementById("calenderMonthYear").innerHTML = month_name[month]+" "+ year;
         document.getElementById("calender-dates").appendChild(calender);
